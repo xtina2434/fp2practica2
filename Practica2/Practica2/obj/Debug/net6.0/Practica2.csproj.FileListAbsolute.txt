@@ -1,0 +1,15 @@
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\bin\Debug\net6.0\Practica2.exe
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\bin\Debug\net6.0\Practica2.deps.json
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\bin\Debug\net6.0\Practica2.runtimeconfig.json
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\bin\Debug\net6.0\Practica2.dll
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\bin\Debug\net6.0\Practica2.pdb
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.csproj.AssemblyReference.cache
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.AssemblyInfoInputs.cache
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.AssemblyInfo.cs
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.csproj.CoreCompileInputs.cache
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.dll
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\refint\Practica2.dll
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.pdb
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\Practica2.genruntimeconfig.cache
+C:\Uni\1ºV\Fp2\Practicas\Practica2\Practica2\obj\Debug\net6.0\ref\Practica2.dll
