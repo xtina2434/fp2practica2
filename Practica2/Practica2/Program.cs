@@ -9,10 +9,13 @@ namespace Practica2
     {
         static void Main()
         {
-            ReadInventory("CrowtherItems.txt");
-            ReadRooms("CrowtherRooms.txt");
+            Map map = new Map();
+            ReadInventory("CrowtherItems.txt",map);
+            ReadRooms("CrowtherRooms.txt",map);
+            map.SetItemsRooms();
+            map.WriteMap();
         }
-        static void ReadInventory(string file)
+        static void ReadInventory(string file, Map map)
         {
             StreamReader streamReader = new StreamReader(file);
 
@@ -24,21 +27,21 @@ namespace Practica2
                streamReader.ReadLine();
                Console.Write("Item name: " + item + "  Descr: " + descr + "  InitRoom: " + room);
                Console.WriteLine();
+               // map.AddItemRoom(room, item); item es string y pide int
             }
             streamReader.Close();
         }
-        static void ReadRooms(string file)
+        static void ReadRooms(string file,Map map)
         {
             StreamReader f = new StreamReader(file);
             while (!f.EndOfStream)
             {
-                //string room = f.ReadLine();
                  int numRoom = int.Parse(f.ReadLine());
-                 ReadRoom(f, numRoom);
+                 ReadRoom(f, numRoom, map);
             }
             f.Close();
         }
-        static void ReadRoom (StreamReader f, int n)
+        static void ReadRoom (StreamReader f, int n,Map map)
         {
             string name = f.ReadLine();
             string descr = f.ReadLine();
@@ -60,6 +63,9 @@ namespace Practica2
                 Console.Write("Route from room: " + n + " to room " + nextRoom + ", direction " + direction + ". CondItem: " + item);
                 Console.WriteLine();
                 s = f.ReadLine();
+                map.AddRoom(n,name,descr);
+                int destRoom = int.Parse(nextRoom);
+                map.AddRouteRoom(n, direction, destRoom, item);
             }
           
         }

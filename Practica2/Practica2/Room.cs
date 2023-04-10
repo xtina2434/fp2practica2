@@ -47,5 +47,25 @@ namespace Practica2
         {
 
         }*/
+       /* public int Move(string dir, List inventory)
+        {
+
+        }*/
+        public bool ForcedMove()
+        {
+            int i = 0;
+            bool enc = false;
+            while(i < routes.Length && !enc)
+            {
+                if (routes[i].direction == "FORCED") enc = true;
+                else i++;
+            }
+            if (enc) return true;
+            else return false;
+        }
+        /*public bool RemoveItem(int it)
+        {
+
+        }*/
     }
 }

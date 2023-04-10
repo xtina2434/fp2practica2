@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using Listas;
 
@@ -66,6 +67,40 @@ namespace Practica2
         /*public string GetItemsRoom(int nRoom)
         {
             
+        }*/
+        public void SetItemsRooms()
+        {
+            for(int i = 0; i < items.Length; i++)
+            {
+                int pos = GetItemIndex(items[i].name);//?
+                AddItemRoom(items[i].initialRoom, pos);
+            }
+        }
+        public void WriteMap()//
+        {
+            for(int i=1; i<rooms.Length; i++)
+            {
+               string infoRoom = GetInfoRoom(i);
+               Console.WriteLine(infoRoom);
+                //descripcion direc
+                //GetItemsRoom
+            }
+        }
+        /*public bool TakeItemRoom(int nRoom, string itemName, List inventory)
+        {
+
+        }
+        public bool DropItemRoom(int nRoom, string itemName, List inventory)
+        {
+
+        }
+        public List Move(int nRoom, string dir, List inventory)
+        {
+
+        }
+        public string GetItemsInfo(List inventory)
+        {
+
         }*/
     }
 }
