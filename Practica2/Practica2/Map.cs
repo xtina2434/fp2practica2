@@ -44,11 +44,11 @@ namespace Practica2
             if (enc) return i;
             else return -1;
         }
-         public void AddRoom(int nRoom, string name, string description)//rooms[nRoom] o rooms[nRooms]??
+        public void AddRoom(int nRoom, string name, string description)//rooms[nRoom] o rooms[nRooms]??
         {
              nRooms++; 
              rooms[nRoom] = new Room(name, description,maxRoutes);
-         }
+        }
         public void AddRouteRoom(int nRoom, string dir, int destRoom, string condItem)
         {
             int item = GetItemIndex(condItem);
@@ -57,33 +57,39 @@ namespace Practica2
         public void AddItemRoom(int nRoom, int itemId)
         {
             rooms[nRoom].AddItem(itemId);
-            nItems++;
         }
         public string GetInfoRoom(int nRoom)
         {
             string info = rooms[nRoom].GetInfo();
             return info;
         }
-        /*public string GetItemsRoom(int nRoom)
+        public string GetItemsRoom(int nRoom) //??
         {
-            
-        }*/
-        public void SetItemsRooms()
+            int[] arrAux = rooms[nRoom].GetArrayItems();
+            string info="-";
+            for(int i = 0; i < arrAux.Length; i++)
+            {
+                info += items[arrAux[i]].name + ": " + items[arrAux[i]].description + "\n";
+            }
+            return info;
+        }
+        public void SetItemsRooms()//?
         {
             for(int i = 0; i < items.Length; i++)
             {
-                int pos = GetItemIndex(items[i].name);//?
-                AddItemRoom(items[i].initialRoom, pos);
+                //int pos = GetItemIndex(items[i].name);//?
+                AddItemRoom(items[i].initialRoom, i); //, pos
             }
         }
         public void WriteMap()//
         {
-            for(int i=1; i<rooms.Length; i++)
+            for(int i=1; i<=rooms.Length; i++)
             {
                string infoRoom = GetInfoRoom(i);
-               Console.WriteLine(infoRoom);
-                //descripcion direc
-                //GetItemsRoom
+              // string infoItem = GetItemsRoom(i);
+               Console.WriteLine(infoRoom + "\n" /*+ infoItem*/);
+
+                //las direcciones con su información correspondiente
             }
         }
         /*public bool TakeItemRoom(int nRoom, string itemName, List inventory)

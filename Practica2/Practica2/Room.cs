@@ -40,13 +40,13 @@ namespace Practica2
         }
         public string GetInfo()///revisar
         {
-            string info = name + description;
+            string info = name + "\n" + description;
             return info;
         }
-        public int[] GetArrayItems()//??
+        public int[] GetArrayItems()//de todo el mapa o solo de la habitacion??
         {
-            int[] arrItems = new int[items.NumElems()];
-            arrItems = items.ToArray(arrItems.Length);
+            int[] arrItems= items.ToArray();// = new int[items.NumElems()];
+           // arrItems = items.ToArray();
             return arrItems;
         }
        /* public int Move(string dir, List inventory)

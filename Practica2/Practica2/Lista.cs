@@ -137,8 +137,9 @@ namespace Listas
             }
             return n;
         }
-        public int[] ToArray(int num)
+        public int[] ToArray()//??
         {
+            int num = NumElems();
             int[] arr = new int[num];
             Nodo aux = pri;
             int i = 0;
