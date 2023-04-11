@@ -139,7 +139,16 @@ namespace Listas
         }
         public int[] ToArray(int num)
         {
-            return null;
+            int[] arr = new int[num];
+            Nodo aux = pri;
+            int i = 0;
+            while (i < num)
+            {
+                arr[i] = aux.dato;
+                aux = aux.sig;
+                i++;
+            }
+            return arr;
         }
 
     }

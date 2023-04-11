@@ -43,10 +43,12 @@ namespace Practica2
             string info = name + description;
             return info;
         }
-        /*public int[] GetArrayItems()
+        public int[] GetArrayItems()//??
         {
-
-        }*/
+            int[] arrItems = new int[items.NumElems()];
+            arrItems = items.ToArray(arrItems.Length);
+            return arrItems;
+        }
        /* public int Move(string dir, List inventory)
         {
 
