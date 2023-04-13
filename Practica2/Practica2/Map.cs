@@ -94,35 +94,60 @@ namespace Practica2
                 //las direcciones con su información correspondiente
             }
         }
-       /* public bool TakeItemRoom(int nRoom, string itemName, List inventory)
+        public bool TakeItemRoom(int nRoom, string itemName, List inventory)//
         {
-            int pos = GetItemIndex(itemName);
-            if (items[pos].initialRoom == nRoom)
+            int[] aux = rooms[nRoom].GetArrayItems();
+            bool enc=false;
+            int i = 0;
+            while(i < aux.Length && !enc)
             {
-                //eliminar el item de la habitacion
-                inventory.InsertaFinal(pos);
-                return true;
+                if (items[i].name == itemName)
+                {
+                    enc = true;
+                    rooms[nRoom].RemoveItem(i);// i??
+                    inventory.InsertaFinal(i);// i??
+                }
+                else i++; 
             }
-            else return false;
+            return enc;
         }
-        public bool DropItemRoom(int nRoom, string itemName, List inventory)
+        public bool DropItemRoom(int nRoom, string itemName, List inventory)//
         {
-            int pos = GetItemIndex(itemName);
-            if (inventory.BuscaDato(pos))
+            int[] aux = rooms[nRoom].GetArrayItems();
+            bool enc = false;
+            int i = 0;
+            while (i < aux.Length && !enc)
             {
-                inventory.EliminaElto(pos);
-                items[pos].initialRoom = nRoom;
-                return true;
+                if (items[i].name == itemName && inventory.BuscaDato(i))//??
+                {
+                    enc = true;
+                    rooms[nRoom].AddItem(i);// i??
+                    inventory.EliminaElto(i);// i??
+                }
+                else i++;
             }
-            else return false;
+            return enc;
         }
-         public List Move(int nRoom, string dir, List inventory)
-         {
+        public List Move(int nRoom, string dir, List inventory)//
+        {
+            List roomsVisited = new List();
+            roomsVisited.InsertaFinal(nRoom);
+            int destRoom = rooms[nRoom].Move(dir, inventory);
+            if(destRoom != -1) roomsVisited.InsertaFinal(destRoom);
 
-         }
-         public string GetItemsInfo(List inventory)
-         {
+            while (rooms[destRoom].ForcedMove())
+            {
+                destRoom = rooms[destRoom].Move(dir, inventory);//
+                roomsVisited.InsertaFinal(destRoom);
+            }
+            return roomsVisited;
+        }
+       /* public string GetItemsInfo(List inventory)
+        {
+            for(int i=0; i<inventory.NumElems(); i++)
+            {
 
-         }*/
+            }
+        }*/
     }
 }

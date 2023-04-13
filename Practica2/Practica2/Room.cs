@@ -81,17 +81,11 @@ namespace Practica2
                 if (routes[i].direction == "FORCED") enc = true;
                 else i++;
             }
-            if (enc) return true;
-            else return false;
+            return enc;
         }
-        public bool RemoveItem(int it)
+        public bool RemoveItem(int it)//
         {
-            if (items.BuscaDato(it))
-            {
-                items.EliminaElto(it);
-                return true;
-            }
-            else return false;
+            return items.EliminaElto(it);
         }
     }
 }

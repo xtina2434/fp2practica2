@@ -18,7 +18,6 @@ namespace Practica2
         static void ReadInventory(string file, Map map)// los almacena en map con AddItemRoom dice el enunciado, pero tiene mas sentido AddItem
         {
             StreamReader streamReader = new StreamReader(file);
-            int cont = 0;
             while (!streamReader.EndOfStream)
             {
                string item = streamReader.ReadLine();
