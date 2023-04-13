@@ -20,9 +20,9 @@ namespace Practica2
         public Map(int maxRooms = 100, int maxRts = 10, int maxItems = 20)
         {
             rooms = new Room[maxRooms];
-            nRooms = 0;//con 0 habitaciones?
+            nRooms = 0;
             items = new Item[maxItems];
-            nItems = 0;//0 ítems?
+            nItems = 0;
             maxRoutes = maxRts;
         }
         public void AddItem(string name, string description, int iniRoom)
@@ -44,7 +44,7 @@ namespace Practica2
             if (enc) return i;
             else return -1;
         }
-        public void AddRoom(int nRoom, string name, string description)//rooms[nRoom] o rooms[nRooms]??
+        public void AddRoom(int nRoom, string name, string description)
         {
              nRooms++; 
              rooms[nRoom] = new Room(name, description,maxRoutes);
@@ -63,7 +63,7 @@ namespace Practica2
             string info = rooms[nRoom].GetInfo();
             return info;
         }
-        public string GetItemsRoom(int nRoom) //??
+        public string GetItemsRoom(int nRoom)
         {
             int[] arrAux = rooms[nRoom].GetArrayItems();
             string info="-";
@@ -73,40 +73,56 @@ namespace Practica2
             }
             return info;
         }
-        public void SetItemsRooms()//?
+        public void SetItemsRooms()
         {
-            for(int i = 0; i < items.Length; i++)
+            int i = 0;
+            while (i < nItems)
             {
-                //int pos = GetItemIndex(items[i].name);//?
-                AddItemRoom(items[i].initialRoom, i); //, pos
+                AddItemRoom(items[i].initialRoom, i);
+                i++;
             }
         }
         public void WriteMap()//
         {
-            for(int i=1; i<=rooms.Length; i++)
+            int i;
+            for( i=1; i<nRooms+1; i++)
             {
                string infoRoom = GetInfoRoom(i);
-              // string infoItem = GetItemsRoom(i);
-               Console.WriteLine(infoRoom + "\n" /*+ infoItem*/);
+               string infoItem = GetItemsRoom(i);
+               Console.WriteLine(infoRoom + "\n" + infoItem);
 
                 //las direcciones con su información correspondiente
             }
         }
-        /*public bool TakeItemRoom(int nRoom, string itemName, List inventory)
+       /* public bool TakeItemRoom(int nRoom, string itemName, List inventory)
         {
-
+            int pos = GetItemIndex(itemName);
+            if (items[pos].initialRoom == nRoom)
+            {
+                //eliminar el item de la habitacion
+                inventory.InsertaFinal(pos);
+                return true;
+            }
+            else return false;
         }
         public bool DropItemRoom(int nRoom, string itemName, List inventory)
         {
-
+            int pos = GetItemIndex(itemName);
+            if (inventory.BuscaDato(pos))
+            {
+                inventory.EliminaElto(pos);
+                items[pos].initialRoom = nRoom;
+                return true;
+            }
+            else return false;
         }
-        public List Move(int nRoom, string dir, List inventory)
-        {
+         public List Move(int nRoom, string dir, List inventory)
+         {
 
-        }
-        public string GetItemsInfo(List inventory)
-        {
+         }
+         public string GetItemsInfo(List inventory)
+         {
 
-        }*/
+         }*/
     }
 }

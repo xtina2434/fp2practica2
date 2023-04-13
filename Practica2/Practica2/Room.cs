@@ -24,35 +24,54 @@ namespace Practica2
             name = nam;
             description = des;
             routes = new Route[maxRts];
-            nRoutes = 0;//con 0 rutas?
-            items = new List(); //lista vacia de items ??
+            nRoutes = 0;
+            items = new List(); 
         }
         public void AddRoute(string dir, int desR, int condIt)
         {
             routes[nRoutes].direction = dir;
             routes[nRoutes].destRoom = desR;
             routes[nRoutes].conditionalItem = condIt;
-            nRoutes++;//??
+            nRoutes++;
         }
-        public void AddItem(int it)//??
+        public void AddItem(int it)
         {
             items.InsertaFinal(it);
         }
-        public string GetInfo()///revisar
+        public string GetInfo()
         {
             string info = name + "\n" + description;
+            /*string dirInfo="";
+            for(int i=0; i<nRoutes; i++)
+            {
+                dirInfo += routes[nRoutes].direction + routes[nRoutes].destRoom + routes[nRoutes].conditionalItem + "\n";
+               // dirInfo += routes[nRoutes].direction + "\n"; //+ routes[nRoutes].destRoom + routes[nRoutes].conditionalItem
+            }*/
+          // string infoTotal = info + "\n" + dirInfo;
             return info;
         }
-        public int[] GetArrayItems()//de todo el mapa o solo de la habitacion??
+        public int[] GetArrayItems()
         {
-            int[] arrItems= items.ToArray();// = new int[items.NumElems()];
-           // arrItems = items.ToArray();
+            int[] arrItems= items.ToArray();
             return arrItems;
         }
-       /* public int Move(string dir, List inventory)
+        public int Move(string dir, List inventory)//revisar
         {
-
-        }*/
+            int i = 0;
+            bool enc = false;
+            while(i<nRoutes && !enc)
+            {
+               // if ((routes[i].direction == dir && inventory.BuscaDato(routes[i].conditionalItem)) || routes[i].direction == dir) enc = true;
+                if(routes[i].direction == dir)
+                {
+                    if (routes[i].conditionalItem != -1 && inventory.BuscaDato(routes[i].conditionalItem)) enc = true;
+                    else enc = true;
+                }
+                else i++;
+            }
+            if (enc) return routes[i].destRoom;
+            else return -1;
+        }
         public bool ForcedMove()
         {
             int i = 0;
@@ -65,9 +84,14 @@ namespace Practica2
             if (enc) return true;
             else return false;
         }
-        /*public bool RemoveItem(int it)
+        public bool RemoveItem(int it)
         {
-
-        }*/
+            if (items.BuscaDato(it))
+            {
+                items.EliminaElto(it);
+                return true;
+            }
+            else return false;
+        }
     }
 }

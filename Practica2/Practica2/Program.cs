@@ -12,21 +12,19 @@ namespace Practica2
             Map map = new Map();
             ReadInventory("CrowtherItems.txt",map);
             ReadRooms("CrowtherRooms.txt",map);
-          //  map.SetItemsRooms();
+            map.SetItemsRooms();
             map.WriteMap();
         }
         static void ReadInventory(string file, Map map)// los almacena en map con AddItemRoom dice el enunciado, pero tiene mas sentido AddItem
         {
             StreamReader streamReader = new StreamReader(file);
-
+            int cont = 0;
             while (!streamReader.EndOfStream)
             {
                string item = streamReader.ReadLine();
                string descr = streamReader.ReadLine();
                int room = int.Parse(streamReader.ReadLine());
                streamReader.ReadLine();
-               //Console.Write("Item name: " + item + "  Descr: " + descr + "  InitRoom: " + room);
-               //Console.WriteLine();
                map.AddItem(item,descr,room); //item es string y pide int
             }
             streamReader.Close();
@@ -46,8 +44,6 @@ namespace Practica2
             string name = f.ReadLine();
             string descr = f.ReadLine();
             map.AddRoom(n, name, descr);
-            //Console.Write("Room: " + n + "  Name: " + name + "  Descr: " + descr);
-            //Console.WriteLine();
             f.ReadLine();
             string s = f.ReadLine();
             while (s != "" && !f.EndOfStream)//espacio en blanco
@@ -61,8 +57,6 @@ namespace Practica2
                 {
                     item = aux[1];
                 }
-               // Console.Write("Route from room: " + n + " to room " + nextRoom + ", direction " + direction + ". CondItem: " + item);
-                //Console.WriteLine();
                 s = f.ReadLine();
                 int destRoom = int.Parse(nextRoom);
                 map.AddRouteRoom(n, direction, destRoom, item);
