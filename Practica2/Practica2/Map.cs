@@ -101,7 +101,7 @@ namespace Practica2
             int i = 0;
             while(i < aux.Length && !enc)
             {
-                if (items[i].name == itemName)
+                if (items[i].name == itemName)//??
                 {
                     enc = true;
                     rooms[nRoom].RemoveItem(i);// i??
@@ -142,12 +142,16 @@ namespace Practica2
             }
             return roomsVisited;
         }
-       /* public string GetItemsInfo(List inventory)
+        public string GetItemsInfo(List inventory)//
         {
-            for(int i=0; i<inventory.NumElems(); i++)
+            string itemsInfo="";
+            int[] arrItemsInfo = inventory.ToArray();
+            for(int i=0; i<arrItemsInfo.Length; i++)
             {
-
+                itemsInfo += items[arrItemsInfo[i]].name + ": " + items[arrItemsInfo[i]].description + "\n";
             }
-        }*/
+            return itemsInfo;
+        }
+        
     }
 }
