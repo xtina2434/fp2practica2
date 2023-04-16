@@ -55,7 +55,7 @@ namespace Practica2
             int[] arrItems= items.ToArray();
             return arrItems;
         }
-        public int Move(string dir, List inventory)//revisar
+        public int Move(string dir, List inventory)//ERROR SE MUEVE SIN TENER EL ITEM
         {
             int i = 0;
             bool enc = false;
@@ -83,8 +83,9 @@ namespace Practica2
             }
             return enc;
         }
-        public bool RemoveItem(int it)//
+        public bool RemoveItem(int it)//REVISAR PUEDES COGER DOS VECES
         {
+            //items.EliminaElto(it);
             return items.EliminaElto(it);
         }
     }

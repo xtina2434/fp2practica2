@@ -94,7 +94,7 @@ namespace Practica2
                 //las direcciones con su información correspondiente
             }
         }
-        public bool TakeItemRoom(int nRoom, string itemName, List inventory)//
+        public bool TakeItemRoom(int nRoom, string itemName, List inventory)//CREO QUE FUNCIONA BIEN
         {
             int[] aux = rooms[nRoom].GetArrayItems();
             bool enc=false;
@@ -111,7 +111,7 @@ namespace Practica2
             }
             return enc;
         }
-        public bool DropItemRoom(int nRoom, string itemName, List inventory)//
+        public bool DropItemRoom(int nRoom, string itemName, List inventory)//NO FUNCIONA
         {
             int[] aux = rooms[nRoom].GetArrayItems();
             bool enc = false;
@@ -131,27 +131,38 @@ namespace Practica2
         public List Move(int nRoom, string dir, List inventory)//
         {
             List roomsVisited = new List();
-            roomsVisited.InsertaFinal(nRoom);
             int destRoom = rooms[nRoom].Move(dir, inventory);
-            if(destRoom != -1) roomsVisited.InsertaFinal(destRoom);
-
-            while (rooms[destRoom].ForcedMove())
-            {
-                destRoom = rooms[destRoom].Move(dir, inventory);//
+            if (destRoom != -1)
+            { 
                 roomsVisited.InsertaFinal(destRoom);
+                while (rooms[destRoom].ForcedMove())//ERROR
+                {
+                    destRoom = rooms[destRoom].Move(dir, inventory);//
+                    roomsVisited.InsertaFinal(destRoom);
+                }
             }
-            return roomsVisited;
+            return roomsVisited;  
         }
-        public string GetItemsInfo(List inventory)//
+        public string GetItemsInfo(List inventory)
         {
             string itemsInfo="";
             int[] arrItemsInfo = inventory.ToArray();
-            for(int i=0; i<arrItemsInfo.Length; i++)
+            for(int i=0; i<arrItemsInfo.Length-1; i++)
             {
                 itemsInfo += items[arrItemsInfo[i]].name + ": " + items[arrItemsInfo[i]].description + "\n";
             }
             return itemsInfo;
         }
-        
+        public string InfoRoomsVisited(List roomsVisited,int nRoom, string dir, List inventory)
+        {
+            roomsVisited = Move(nRoom, dir, inventory);
+            int[] auxRooms = roomsVisited.ToArray();
+            string infoRooms = "";
+            for (int i = 0; i < auxRooms.Length; i++)
+            {
+                infoRooms += GetInfoRoom(auxRooms[i]) + "\n";
+            }
+            return infoRooms;
+        }
     }
 }

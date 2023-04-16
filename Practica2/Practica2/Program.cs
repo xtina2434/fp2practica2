@@ -15,14 +15,19 @@ namespace Practica2
             map.SetItemsRooms();
            // map.WriteMap();
             List inventory = new List();
-
-            //bucle, El jugador comenzará en la habitación 1 con el inventario vacío y terminará cuando alcance la habitación 0
-            Console.Write(">");
-            string input = Console.ReadLine();
-            ProcessCommand(map, input,1, inventory);//
-
+            
+            int actualRoom = 1;
+            string infoFirstRoom = map.GetInfoRoom(actualRoom);
+            Console.WriteLine(infoFirstRoom+ "\n");
+            while(actualRoom != 0)
+            {
+                //bucle, El jugador comenzará en la habitación 1 con el inventario vacío y terminará cuando alcance la habitación 0
+                Console.Write("> ");
+                string input = Console.ReadLine();
+                ProcessCommand(map, input, ref actualRoom, inventory);
+            }
         }
-        static void ReadInventory(string file, Map map)// los almacena en map con AddItemRoom dice el enunciado, pero tiene mas sentido AddItem
+        static void ReadInventory(string file, Map map)
         {
             StreamReader streamReader = new StreamReader(file);
             while (!streamReader.EndOfStream)
@@ -68,7 +73,7 @@ namespace Practica2
                 map.AddRouteRoom(n, direction, destRoom, item);
             }
         }
-        static void ProcessCommand(Map map, string input, int playerRoom, List inventory)
+        static void ProcessCommand(Map map, string input, ref int playerRoom, List inventory)
         {
             string[] words = input.Trim().ToUpper().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
@@ -80,32 +85,51 @@ namespace Practica2
                     "-TAKE <item>\n" +
                     "-DROP <item>\n" +
                     "Items: KEYS, LAMP, ROD, BIRD, NUGGET, DIAMOND, COINS, EMERALD, EGGS, WATER, PLANT, CHEST.\n"
-                    + "Directions: IN, OUT, NORTH, SOUTH, WEST, EAST, UP, DOWN, XYZZY, PLUGH, WAVE, SWIM");
-                
-            } 
-            else if (words[0] == "INVENTORY") map.GetItemsInfo(inventory);
-            else if(words[0] == "LOOK") map.GetInfoRoom(playerRoom);
-            else if(words[0] == "TAKE" && words[1]=="<item>")//revisar words[1]=="<item>"
-            {
-                if(!map.TakeItemRoom(playerRoom, words[1] , inventory)) 
-                {
-                    Console.WriteLine("You can´t do this action.");
-                } 
-                else map.TakeItemRoom(playerRoom, words[1], inventory); 
+                    + "Directions: IN, OUT, NORTH, SOUTH, WEST, EAST, UP, DOWN, XYZZY, PLUGH, WAVE, SWIM\n");
+
             }
-            else if(words[0] == "DROP" && words[1] == "<item>") //revisar words[1]=="<item>"
+            else if (words[0] == "INVENTORY") 
+            {
+               string inventoryInfo =  map.GetItemsInfo(inventory);
+               Console.WriteLine(inventoryInfo);
+            }
+            else if (words[0] == "LOOK")
+            {
+                string infoRoom = map.GetInfoRoom(playerRoom);
+                Console.WriteLine(infoRoom+ "\n" );
+            }
+            else if (words[0] == "TAKE")
+            {
+                if (!map.TakeItemRoom(playerRoom, words[1], inventory))
+                {
+                    Console.WriteLine("You can´t do this action.\n");
+                }
+                else
+                {
+                    map.TakeItemRoom(playerRoom, words[1], inventory);
+                    Console.WriteLine("Item " + words[1] + " taken. \n");
+                }
+            }
+            else if (words[0] == "DROP")
             {
                 if (!map.DropItemRoom(playerRoom, words[1], inventory))
                 {
                     Console.WriteLine("You can´t do this action.");
                 }
-                else map.DropItemRoom(playerRoom, words[1], inventory);
+                else
+                {
+                    map.DropItemRoom(playerRoom, words[1], inventory);
+                    Console.WriteLine("Item " + words[1] + " dropped");
+                }
             }
             else
             {
-                map.Move(playerRoom, words[0], inventory);
+                List roomsVisited = map.Move(playerRoom, words[0], inventory);
+                string infoRoomsVisited = map.InfoRoomsVisited(roomsVisited, playerRoom, words[0], inventory);
+                Console.WriteLine(infoRoomsVisited);
+                int[] auxRooms = roomsVisited.ToArray();
+                playerRoom = auxRooms[auxRooms.Length - 1];
             }
-            
         }
     }
 }
